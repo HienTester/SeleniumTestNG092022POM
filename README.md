@@ -1,1 +1,1 @@
-# SeleniumTestNG092022pom
+# SeleniumTestNG092022POM
