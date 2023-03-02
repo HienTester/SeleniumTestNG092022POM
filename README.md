@@ -1,2 +1,1 @@
-# SeleniumTestNG092022POM + Parallel Execution
-
+# SeleniumTestNG092022Parallel
