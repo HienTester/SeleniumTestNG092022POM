@@ -1,7 +1,7 @@
 package hientester.com.pages.customers;
 
-import hientester.com.WebUI;
-import static hientester.com.WebUI.*;
+import hientester.com.keywords.WebUI;
+import static hientester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -20,14 +20,6 @@ public class CustomersPage {
     private By tdCustomerName = By.xpath("//table[@id='DataTables_Table_0']//tbody//tr[1]//td[3]/a");
 
 
-    //Hàm xây dựng
-    private WebDriver driver;
-
-    public CustomersPage(WebDriver _driver) {
-        driver = _driver;
-        new WebUI(driver);
-    }
-
     //Các hàm xử lý cho chức năng thuộc Customers Page
     public void verifyCustomerPage() {
         Assert.assertEquals(getCurrentURL(), PAGE_URL, "URL chưa đúng trang Customers.");
@@ -41,7 +33,7 @@ public class CustomersPage {
         //driver.findElement(buttonAddCustomer).click();
         clickElement(buttonAddCustomer);
 
-        return new AddNewCustomerPage(driver);
+        return new AddNewCustomerPage();
     }
 
     public void searchCustomer(String companyName){
@@ -61,6 +53,6 @@ public class CustomersPage {
         //driver.findElement(tdCustomerName).click(); (thay thế bằng hàm bên dưới)
         clickElement(tdCustomerName);
 
-        return new CustomerDetailPage(driver);
+        return new CustomerDetailPage();
     }
 }

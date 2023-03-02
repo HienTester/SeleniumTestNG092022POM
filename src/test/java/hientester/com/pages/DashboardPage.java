@@ -1,7 +1,7 @@
 package hientester.com.pages;
 
-import hientester.com.WebUI;
-import static hientester.com.WebUI.*;
+import hientester.com.keywords.WebUI;
+import static hientester.com.keywords.WebUI.*;
 import hientester.com.pages.customers.CustomersPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,12 +18,6 @@ public class DashboardPage {
         By widgetStatistics = By.xpath("//div[@id='widget-top_stats']");
         By checkboxQuickStatistics = By.xpath("//label[normalize-space()='Quick Statistics']");
 
-        //Hàm xây dựng
-        private WebDriver driver;
-        public DashboardPage(WebDriver _driver) {
-            driver = _driver;
-            new WebUI(driver);
-        }
 
         public void verifyDashboardpage(){
             //Kiểm tra URL chứa phần tử thuộc trang DB
@@ -37,7 +31,7 @@ public class DashboardPage {
             //driver.findElement(menuCustomer).click();
             clickElement(menuCustomer);
 
-            return new CustomersPage(driver);
+            return new CustomersPage();
         }
 
         public void clickCheckboxQuickStatistics() {

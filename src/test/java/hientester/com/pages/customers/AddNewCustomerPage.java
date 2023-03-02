@@ -1,7 +1,7 @@
 package hientester.com.pages.customers;
 
-import hientester.com.WebUI;
-import static hientester.com.WebUI.*;
+import hientester.com.keywords.WebUI;
+import static hientester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -27,12 +27,6 @@ public class AddNewCustomerPage {
     public By inputCountry = By.xpath("//label[@for='country']/following-sibling::div//input[@type='search']");
     public By buttonSave = By.xpath("//div[@id='profile-save-section']//button[normalize-space()='Save']");
 
-    private WebDriver driver;
-
-    public AddNewCustomerPage(WebDriver _driver){
-        driver = _driver;
-        new WebUI(driver);//Khởi tạo class WebUI để truyền giá trị driver từ bên ngoài vào
-    }
 
     public void selectGroups(String groupName){
         //driver.findElement(dropdownGroups).click();

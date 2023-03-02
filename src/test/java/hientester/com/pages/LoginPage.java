@@ -1,7 +1,8 @@
 package hientester.com.pages;
 
-import hientester.com.WebUI;
-import static hientester.com.WebUI.*;
+import hientester.com.helpers.PropertiesHelper;
+import hientester.com.keywords.WebUI;
+import static hientester.com.keywords.WebUI.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -19,21 +20,13 @@ public class LoginPage {
     By buttonLogin = By.xpath("//button[normalize-space()='Login']");
     By messageErroEmail = By.xpath("//div[@class='text-center alert alert-danger']");
 
-    //Hàm xây dựng để truyền vào driver
-    private WebDriver driver;
-
-    public LoginPage(WebDriver _driver) {
-        driver = _driver;
-        new WebUI(driver);
-    }
-
-    //Viết các hàm xử lý cho trang Login
+       //Viết các hàm xử lý cho trang Login
     public void verifyHeaderPage(){
         Assert.assertEquals(getTextElement(headerPage),PAGETEXT,"FAIL.Header page not match");
     }
 
     public void verifyErrorMessageDisplay(){
-        Assert.assertTrue(driver.findElement(messageErroEmail).isDisplayed(),"FAIL.Error message no display");
+        Assert.assertTrue(getWebElement(messageErroEmail).isDisplayed(),"FAIL.Error message no display");
         Assert.assertEquals(getTextElement(messageErroEmail),"Invalid email or password", "FAIL. Content of the Error message not match.");
     }
 
@@ -55,7 +48,7 @@ public class LoginPage {
 
 
     public DashboardPage login(String email, String password){
-        openURL(URL);
+        openURL(PropertiesHelper.getValue("url"));
         verifyHeaderPage();
         enterEmail(email);
         //setText(inputEmail,email);
@@ -64,12 +57,12 @@ public class LoginPage {
         clickOnLoginButton();
         //clickElement(buttonLogin);
 
-        return new DashboardPage(driver);
+        return new DashboardPage();
     }
 
 
     public void loginInvalidEmail(String email, String password){
-        openURL(URL);
+        openURL(PropertiesHelper.getValue("url"));
         verifyHeaderPage();
         enterEmail(email);
         //setText(inputEmail,email);

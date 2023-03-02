@@ -15,7 +15,7 @@ public class DashbroadTest extends BaseTest {
     @Test
     public void testOpenMenuOnDashboard() {
         //Kiểm tra trang đăng nhập Login
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         //Liên kết trang được xảy ra nhờ hàm login trả về là sự khởi tạo của trang Dashboard
         dashboardPage = loginPage.login("admin@example.com", "123456");
 
@@ -29,7 +29,7 @@ public class DashbroadTest extends BaseTest {
 
     @Test
     public void testFilterWidgetsOnDashboard() {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.login("admin@example.com", "123456");
         dashboardPage.verifyDashboardpage();
         //Check Filter Widgets on Dashboard

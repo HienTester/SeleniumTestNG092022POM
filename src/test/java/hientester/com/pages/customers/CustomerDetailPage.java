@@ -1,7 +1,7 @@
 package hientester.com.pages.customers;
 
-import hientester.com.WebUI;
-import static hientester.com.WebUI.*;
+import hientester.com.keywords.WebUI;
+import static hientester.com.keywords.WebUI.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -11,13 +11,6 @@ public class CustomerDetailPage  extends AddNewCustomerPage{
     //Không bị duplicated
     //Tiết kiệm thời gian
     //Lỡ có thay đổi thì chỉ cần sửa 1 nơi =>AddNewCustomerPage
-
-    private WebDriver driver;
-    public CustomerDetailPage(WebDriver _driver){
-        super (_driver);
-        driver = _driver;
-        new WebUI(driver);
-    }
 
     public void checkCustomerDetail(String customerName){
         waitForPageLoaded();

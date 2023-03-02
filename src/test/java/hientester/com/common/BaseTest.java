@@ -1,5 +1,7 @@
 package hientester.com.common;
 
+import hientester.com.drivers.DriverManager;
+import hientester.com.helpers.PropertiesHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,15 +11,18 @@ import org.testng.annotations.*;
 
 public class BaseTest {
 
-    public static WebDriver driver;
-
     @BeforeMethod
     @Parameters({"browser"})
     public static void createDriver(@Optional("chrome") String browser) {
-        setupDriver(browser);
+        WebDriver driver = setupDriver(browser);
+        PropertiesHelper.loadAllFiles();
+        //Set giá tri driver đã được khởi tạo vào ThreadLocal
+        DriverManager.setDriver(driver);
+
     }
 
     public static WebDriver setupDriver(String browserName) {
+        WebDriver driver;
         switch (browserName.trim().toLowerCase()) {
             case "chrome":
                 driver = initChromeDriver();
@@ -38,7 +43,7 @@ public class BaseTest {
     private static WebDriver initChromeDriver() {
         System.out.println("Launching Chrome browser...");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         return driver;
     }
@@ -46,7 +51,7 @@ public class BaseTest {
     private static WebDriver initEdgeDriver() {
         System.out.println("Launching Edge browser...");
         WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
+        WebDriver driver = new EdgeDriver();
         driver.manage().window().maximize();
         return driver;
     }
@@ -54,23 +59,15 @@ public class BaseTest {
     private static WebDriver initFirefoxDriver() {
         System.out.println("Launching Firefox browser...");
         WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+        WebDriver driver = new FirefoxDriver();
         driver.manage().window().maximize();
         return driver;
     }
 
     @AfterMethod
     public static void closeDriver() {
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0)); //Reset timeout
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        if(driver != null) {
-            driver.quit();
+        if (DriverManager.getDriver() != null) {
+            DriverManager.quit();
         }
     }
-
 }
